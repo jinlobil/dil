@@ -22,12 +22,7 @@ public class FoodController {
     //푸드 생성
     @PostMapping("/api/restaurant/{restaurantId}/food/register")
     public Food createFood(@RequestBody FoodRequestDto requestDto, @PathVariable Long restaurantId) {
-        Restaurant restaurant = restaurantRepository.findById(restaurantId).orElseThrow(
-                () -> new IllegalArgumentException("식당이 존재하지 않습니다."));
-        System.out.println("restaurant = " + restaurant);
-        Food food = new Food(requestDto, restaurant);
-        System.out.println("food = " + food);
-        return foodService.create(food);
+        return foodService.create(restaurantId, requestDto);
     }
     //푸드 전체 조회
     @GetMapping("/api/restaurant/{restaurantId}/foods")

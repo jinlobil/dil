@@ -23,8 +23,7 @@ public class RestaurantController {
     // 서비스로 생성 보냄
     @PostMapping("/api/restaurant/register")
     public Restaurant createContents(@RequestBody RestaurantRequestDto requestDto) {
-        Restaurant restaurant = new Restaurant(requestDto);
-        return restaurantService.create(restaurant);
+        return restaurantService.create(requestDto);
     }
     // 전체 조회 레포로 보냄
     @GetMapping("/api/restaurant")

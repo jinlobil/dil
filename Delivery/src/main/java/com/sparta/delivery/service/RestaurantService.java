@@ -42,7 +42,23 @@ public class RestaurantService {
         return restaurant1.getId();
     }
     @Transactional
-    public Restaurant create(Restaurant restaurant) {
+    public Restaurant create(RestaurantRequestDto requestDto) {
+        Restaurant restaurant = new Restaurant(requestDto);
+        Long price = requestDto.getMinOrderPrice();
+        Long fee = requestDto.getDeliveryFee();
+        if (price < 1000 || price > 100000) {
+            throw new IllegalArgumentException("가격은 1000원에서 10만원 사이로 입력해주세요");
+        }
+        if (price %100!=0) {
+            throw new IllegalArgumentException("100원 단위로 입력해주세요");
+        }
+        if (fee < 0 || fee > 10000) {
+            throw new IllegalArgumentException("배달금액은 0원에서 1만원 사이로 입력해주세요");
+        }
+        if (fee %500!=0) {
+            throw new IllegalArgumentException("500원 단위로 입력해주세요");
+        }
+
         return restaurantRepository.save(restaurant);
 
     }

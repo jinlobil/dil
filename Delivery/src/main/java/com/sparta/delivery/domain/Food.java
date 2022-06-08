@@ -11,6 +11,8 @@ import javax.persistence.*;
 @Getter
 @Entity
 @NoArgsConstructor
+//2개의 유니크값 칼럼을 조회 비교 하여 중복값을 막음(푸드네임,레스토랑아이디)
+@Table(uniqueConstraints={@UniqueConstraint(columnNames = {"name" , "restaurantId"})})
 public class Food {
 
     @GeneratedValue(strategy = GenerationType.AUTO)
